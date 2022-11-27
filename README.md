@@ -1,4 +1,8 @@
 SEEL4213-01_22231_Group8
+- Seak Jian De
+- Soh Khai Yang
+- Ong Yik Hern
+
 # Remote Patient Monitoring/Alert System
 
 ## Problem Statement
