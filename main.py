@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_mqtt import Mqtt
+import database as db
 
 app = Flask(__name__, static_folder='assets')
 
@@ -31,12 +32,13 @@ def handle_mqtt_message(client, userdata, message):
 
 @app.route("/")
 def dashboard():
-    data = [31, 40, 28, 51, 42, 82, 56]
-    devices = [1, 2, 3]
-    return render_template('dashboard.html',devices=devices)
+    patients = db.get_patient_detail()
+    return render_template('dashboard.html',patients=patients)
 
-@app.route("/devices/<id>")
+@app.route("/<id>")
 def devices(id):
-    data = [31, 40, 28, 51, 42, 82, 56]
-    devices = [1, 2, 3]
-    return render_template('devices.html',devices=devices,data=data,id=id)
+    patients = db.get_patient_detail()
+    detail = db.get_single_patient_detail(id)
+    ecg, ecg_time = db.get_ecg_data(id)
+    print(ecg_time)
+    return render_template('devices.html', id=id, detail=detail, patients=patients, ecg=ecg, ecg_time=ecg_time)
