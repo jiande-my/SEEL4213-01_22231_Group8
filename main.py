@@ -32,4 +32,11 @@ def handle_mqtt_message(client, userdata, message):
 @app.route("/")
 def dashboard():
     data = [31, 40, 28, 51, 42, 82, 56]
-    return render_template('index.html', data=data)
+    devices = [1, 2, 3]
+    return render_template('dashboard.html',devices=devices)
+
+@app.route("/devices/<id>")
+def devices(id):
+    data = [31, 40, 28, 51, 42, 82, 56]
+    devices = [1, 2, 3]
+    return render_template('devices.html',devices=devices,data=data,id=id)
