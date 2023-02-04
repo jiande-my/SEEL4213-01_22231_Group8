@@ -80,3 +80,8 @@ Apexcharts.js is a JavaScript charting library that allows for the creation of i
 Leaflet.js is an open-source JavaScript library for creating maps. In this project, it is used to display the geographical location of the patient on a map.
 
 Together, these technologies provide a rich user experience and allow the users to view and interact with the data in a meaningful way. The client-side code receives data from the Flask server and displays it to the user in a visually appealing and interactive format.
+
+# Final Result
+![](https://github.com/jiande-my/SEEL4213-01_22231_Group8/blob/main/static/images/webpage01.png)
+![](https://github.com/jiande-my/SEEL4213-01_22231_Group8/blob/main/static/images/webpage02.png)
+![](https://github.com/jiande-my/SEEL4213-01_22231_Group8/blob/main/static/images/webpage03.png)
