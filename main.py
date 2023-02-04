@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_mqtt import Mqtt
 import database as db
+import json
 
 app = Flask(__name__, static_folder='assets')
 
@@ -24,11 +25,33 @@ def handle_connect(client, userdata, flags, rc):
 
 @mqtt_client.on_message()
 def handle_mqtt_message(client, userdata, message):
-    data = dict(
-        topic=message.topic,
-        payload=message.payload.decode()
-    )
-    print('Received message on topic: {topic} with payload: {payload}'.format(**data))
+    try:
+        data = dict(
+            topic=message.topic,
+            payload=message.payload.decode()
+        )
+        print('Received message on topic: {topic} with payload: {payload}'.format(**data))      
+        stream_data = json.loads(message.payload.decode())
+
+        try:
+            patient_id = int(message.topic)
+        except ValueError:
+            print("Error: message topic is not an integer.")
+        else:
+            if "ecg" in stream_data:
+                db.insert_ecg_data(patient_id=patient_id, ecg=float(stream_data['ecg']))
+                print(stream_data['ecg'])
+
+            if "geolat" and "geolong" in stream_data:
+                db.update_patient_location(patient_id=patient_id, geolat=stream_data['geolat'], geolong=stream_data['geolong'])
+
+            if "heartbeat" and "o2_saturation" and "bloodpressure" in stream_data:\
+                db.update_patient_data(patient_id=patient_id, heartbeat=stream_data['heartbeat'],
+                o2_saturation=stream_data['o2_saturation'], bloodpressure=stream_data['o2_saturation'])
+
+        
+    except json.decoder.JSONDecodeError as e:
+            print(f"Error while decoding json : {e}")
 
 @app.route("/")
 def dashboard():

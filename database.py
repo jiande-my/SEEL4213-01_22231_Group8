@@ -38,6 +38,20 @@ def get_single_patient_detail(id):
 
     return rows
 
+def get_single_patient_id(name):
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM patients WHERE id = %s", name)
+
+    rows = cursor.fetchall()
+    conn.commit()
+
+    print(rows)
+
+    cursor.close()
+
+    return rows  
+
 def get_ecg_data(patient_id):
     cursor = conn.cursor()
 
@@ -75,18 +89,31 @@ def insert_ecg_data(patient_id, ecg):
 
     print("Data inserted successfully")
 
-def update_patient_data(patient_id, geolat, geolong):
-        cursor = conn.cursor()
+def update_patient_location(patient_id, geolat, geolong):
+    cursor = conn.cursor()
 
-        query = """
-            UPDATE patients SET  geolat = %s, geolong = %s WHERE id = %s;
-        """
-        cursor.execute(query, (geolat, geolong, patient_id))
-        conn.commit()
+    query = """
+        UPDATE patients SET  geolat = %s, geolong = %s WHERE id = %s;
+    """
+    cursor.execute(query, (geolat, geolong, patient_id))
+    conn.commit()
 
-        print("Data updated successfully")
+    print("Location updated successfully")
 
-        cursor.close()
+    cursor.close()
+
+def update_patient_data(patient_id, heartbeat, o2_saturation, bloodpressure):
+    cursor = conn.cursor()
+
+    query = """
+        UPDATE patients SET  heartbeat = %s, o2_saturation = %s, bloodpressure = %s WHERE id = %s;
+    """
+    cursor.execute(query, (heartbeat, o2_saturation, bloodpressure, patient_id))
+    conn.commit()
+
+    print("Data updated successfully")
+
+    cursor.close()
 
 # update_patient_data(1, 1.53, 103.66)
 # update_patient_data(2, 1.53, 103.62)
