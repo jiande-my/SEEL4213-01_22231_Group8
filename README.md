@@ -4,7 +4,7 @@ SEEL4213-01_22231_Group8
 - Ong Yik Hern
 
 # Remote Patient Monitoring/Alert System
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg?style=for-the-badge&logo=appveyor)](https://www.python.org/) [![Running](https://img.shields.io/badge/running-yes-green.svg?style=for-the-badge&logo=appveyor)]([https://your-project-url.com](http://139.59.254.206/))
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) [![Running](https://img.shields.io/badge/running-yes-green.svg)]([https://your-project-url.com](http://139.59.254.206/))
 
 # Demo (running)
 ## URL
