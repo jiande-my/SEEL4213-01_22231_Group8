@@ -60,7 +60,7 @@ def dashboard():
 
 @app.route("/<id>")
 def devices(id):
-    patients = db.get_patient_detail()
+    patients = db.get_patient_detail_expect(id)
     detail = db.get_single_patient_detail(id)
     ecg, ecg_time = db.get_ecg_data(id)
     print(ecg_time)

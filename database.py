@@ -24,6 +24,21 @@ def get_patient_detail():
 
     return rows
 
+def get_patient_detail_expect(id):
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM patients WHERE id != %s", id)
+
+    rows = cursor.fetchall()
+    conn.commit()
+
+    for row in rows:
+        print(row)
+
+    cursor.close()
+
+    return rows
+
 def get_single_patient_detail(id):
     cursor = conn.cursor()
 
