@@ -47,7 +47,7 @@ def handle_mqtt_message(client, userdata, message):
 
             if "heartbeat" and "o2_saturation" and "bloodpressure" in stream_data:\
                 db.update_patient_data(patient_id=patient_id, heartbeat=stream_data['heartbeat'],
-                o2_saturation=stream_data['o2_saturation'], bloodpressure=stream_data['o2_saturation'])
+                o2_saturation=stream_data['o2_saturation'], bloodpressure=stream_data['bloodpressure'])
 
         
     except json.decoder.JSONDecodeError as e:
